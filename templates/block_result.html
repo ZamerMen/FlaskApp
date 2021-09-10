@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Результат раскладки блоков
+{% endblock title %}
+
+{% block content %}
+    <h1>Результат раскладки блоков</h1>
+    <p>Для участка стены длинной {{width_block}}</p>
+    {{result}}
+
+    <p>
+    <a href='{{url_for('block')}}'>разложить еще больше блоков</a>
+    </p>
+{% endblock content %}

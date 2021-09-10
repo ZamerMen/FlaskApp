@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+        <h3>Варианты доступных раскладок</h3>
+    {% for m in menu %}
+        <li><a href="{{url_for(m.url)}}">{{m.name}}</a></li>
+    {% endfor %}
+{% endblock %}
+
+
+
+<body>
+
+
+</body>

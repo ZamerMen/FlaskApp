@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{title}}
+{% endblock title %}
+
+
+
+
+{% block content %}
+<h3>Введите длину стены для раскладки блоков</h3>
+
+<form action="/block_result" method="POST">
+    <input type="text" name="width_block">
+
+    <button type="submit">разложить</button>
+</form>
+{% endblock content %}
