@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block search %}
+<li class="nav-item">
+        <form action="{{url_for('posts.search')}}" method="post">
+          <input type="text"  placeholder="search" name="search_word" value="{{request.args.get('search_word','')}}">
+            <button type="submit">Поиск</button>
+        </form>
+</li>
+{% endblock %}
+
+{% block title %}
+обратная связь
+{% endblock title %}
+
+
+
+{% block content %}
+
+<h1>Список предложений</h1>
+
+<a href="{{url_for('posts.post_create')}}">создать новую запись</a>
+
+    {%for post in posts%}
+<p>
+    <a href="{{url_for('posts.post_detail',slug=post.slug)}}"
+            <h1>{{post.id}}, {{post.title}}, {{post.created}}, {{post.tags}}</h1>
+    </a>
+</p>
+    {%endfor%}
+
+
+{% endblock %}

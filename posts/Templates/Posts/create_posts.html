@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Создание сообщения
+{% endblock title %}
+
+
+
+{% block content %}
+<h1>Список предложений</h1>
+
+<p>
+<form action="{{url_for('posts.post_created')}}" method="post">
+
+    {% for fild in form %}
+    <p> {{fild.lable}} </p>
+    <p> {{fild}} </p>
+    {% endfor %}
+
+    <p>
+    <button type="submit">опубликовать</button>
+    </p>
+
+
+
+</form>
+
+</p>
+
+{% endblock %}
+
+
+
+
+
