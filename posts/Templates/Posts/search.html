@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Результат поиска
+{% endblock title %}
+
+
+
+{% block content %}
+
+<h1>Результат поиска</h1>
+
+<p>Вы хотели найти {{search_word}}</p>
+
+{%for post in posts%}
+        <a href="{{url_for('posts.post_detail',slug=post.slug)}}"
+        <p>{{post.title}}</p>
+
+        <!--      <a href="{{url_for('posts.post_detail',slug=post.slug)}}"-->
+        <!--            <h1>{{post.id}}, {{post.title}}, {{post.created}}, {{post.tags}}</h1>-->
+        <!--    </a>-->
+        </a>
+{%endfor%}
+
+{% endblock %}

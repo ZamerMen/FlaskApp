@@ -1,8 +1,8 @@
 from app import app
 from models import db
 db.create_all()
-from models import Post
-p = Post(title='fp', body='its body post')
+from models import Plat
+p = Plat(title='fp', body='its body post')
 db.session.add(p)#хранит все монипуляции над базой
 db.session.commit()
 

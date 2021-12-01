@@ -16,4 +16,14 @@
 
     <button type="submit">разложить</button>
 </form>
+
+
+<h3>предыдущие запросы пользователей</h3>
+
+
+{%for one_query in log_query%}
+<!--дата ({{one_query.date}})   Значение запроса ({{one_query.data_query}})<br>-->
+дата ({{one_query.date.strftime('%Y-%m-%d(%H:%M)')}})   Значение запроса ({{one_query.data_query}})<br>
+{%endfor%}
+
 {% endblock content %}

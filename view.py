@@ -1,6 +1,8 @@
 from app import app
 from flask import render_template, request, url_for
-
+from models import db
+from models import Plat, Block
+from datetime import datetime
 
 # расчетные модули
 from Func.fbs import FBS
@@ -28,7 +30,8 @@ def video():
 @app.route('/block', methods=['post','get'])
 def block():
     title = 'раскладка блоков'
-    return render_template('block.html', title=title)
+    log_query = Block.query.order_by(Block.date.desc()).limit(5)
+    return render_template('block.html', title=title, log_query=log_query)
 
 
 @app.route('/block_result', methods = ['post','get'])
@@ -39,16 +42,27 @@ def block_result():
     except:
         return render_template('block_err.html', width_block=width_block)
 
-    print('длина участка стены равна', width_block)
     result = FBS(int(width_block))
-    print(result)
+    query_result = f'Длина участка раскладки:{width_block}'
+    p = Block(data_query=query_result, date=datetime.utcnow())
+    try:
+        db.session.add(p)
+        db.session.commit()
+    except:
+        return 'ошибка базы данных'
+
+
     return render_template('block_result.html', width_block=width_block, result=result)
 
 
 @app.route('/plat', methods=['post','get'])
 def plat():
     title = 'раскладка плит'
-    return render_template('plat.html', title=title)
+    # log_query = Plat.query.all()
+    log_query = Plat.query.order_by(Plat.date.desc()).limit(5)
+    print(log_query)
+    return render_template('plat.html', title=title, log_query=log_query)
+
 
 @app.route('/plat_result', methods = ['post','get'])
 def plat_result():
@@ -60,5 +74,13 @@ def plat_result():
         return render_template('plat_err.html')
 
     result = plat_build(width1_plat, width2_plat, lenght_plat)
-    return render_template('plat_result.html', result=result,
-                           width1_plat=width1_plat, width2_plat=width2_plat, lenght_plat=lenght_plat)
+    query_result = f'ширина1:{width1_plat} ширина2:{width2_plat} длина раскладки:{lenght_plat}'
+    p = Plat(data_query=query_result, date=datetime.utcnow())
+    print(p)
+
+    try:
+        db.session.add(p)
+        db.session.commit()
+    except:
+        return 'ошибка базы данных'
+    return render_template('plat_result.html', result=result,width1_plat=width1_plat, width2_plat=width2_plat, lenght_plat=lenght_plat)
