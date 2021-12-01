@@ -8,6 +8,7 @@ def slugify(s):
 	return re.sub(pattern, '-', s)
 
 
+### builder func section
 class Plat(db.Model):
 	time = datetime.utcnow()
 	id = db.Column(db.Integer, primary_key=True)
@@ -28,6 +29,7 @@ class Block(db.Model):
 		return '<Последний запрос %r>' %self.data_query
 
 
+### Post section ###
 post_tags = db.Table('post_tags',
                     db.Column('post_id', db.Integer, db.ForeignKey('post.id'), primary_key=True),
                     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True))

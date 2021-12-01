@@ -10,7 +10,7 @@
 
 <h1>Результат поиска</h1>
 
-<p>Вы хотели найти {{search_word}}</p>
+<p>Вы хотели найти "{{search_word}}" найдено {{anount}}</p>
 
 {%for post in posts%}
         <a href="{{url_for('posts.post_detail',slug=post.slug)}}"

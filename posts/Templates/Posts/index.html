@@ -10,21 +10,21 @@
 {% endblock %}
 
 {% block title %}
-обратная связь
+Сообщения
 {% endblock title %}
 
 
 
 {% block content %}
 
-<h1>Список предложений</h1>
+<h1>Напиши пост товарищь не стой молча в стороне</h1>
 
 <a href="{{url_for('posts.post_create')}}">создать новую запись</a>
 
     {%for post in posts%}
 <p>
     <a href="{{url_for('posts.post_detail',slug=post.slug)}}"
-            <h1>{{post.id}}, {{post.title}}, {{post.created}}, {{post.tags}}</h1>
+            <h1>{{post.id}}, {{post.title}}, {{post.created.strftime('%Y-%m-%d(%H:%M)')}}</h1>
     </a>
 </p>
     {%endfor%}

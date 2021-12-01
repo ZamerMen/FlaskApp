@@ -9,14 +9,14 @@ posts = Blueprint('posts',__name__, template_folder='templates')
 
 
 @posts.route('/create')
-@login_required
+# @login_required
 def create_post():
 	form = PostForms()
 	return render_template('posts/create_posts.html', form=form)
 
 
 @posts.route('/<slug>/edit/', methods=['post','get'])
-@login_required
+# @login_required
 def edit_post(slug):
 	post = Post.query.filter(Post.slug==slug).first()
 	if request.method=='POST':
@@ -80,9 +80,11 @@ def search():
 	search_word = request.form.get('search_word')
 	print(f'the word is {search_word}')
 	posts = Post.query.filter(Post.title.contains(search_word)|Post.body.contains(search_word)).all()
+	anount = len(posts)
+	print(anount)
 	# posts = Post.query.filter(Post.title.contains(search_word) | Post.body.contains(search_word)).all()
 	print(posts)
 	# if len(posts)<1:
 	# 	return render_template('posts/search.html', search_word=', но мы не смогли', posts=posts)
-	return render_template('posts/search.html', search_word=search_word, posts=posts)
+	return render_template('posts/search.html', search_word=search_word, posts=posts, anount=anount)
 
