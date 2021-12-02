@@ -50,7 +50,7 @@ def post_create():
 	return render_template('posts/create_posts.html')
 
 
-@posts.route('/created', methods=['post','get'])
+@posts.route('/created', methods=['post', 'get'])
 def post_created():
 
 	title = request.form.get('title')
