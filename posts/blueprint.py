@@ -56,7 +56,7 @@ def post_created():
 	title = request.form.get('title')
 	body = request.form.get('body')
 	# tag = request.form.get('tag')
-	print(title,body)
+
 	try:
 		# t = Tag(name=tag)
 		p = Post(title=title, body=body)
@@ -78,13 +78,7 @@ def tags_detail(slug):
 @posts.route('/search', methods=['get', 'post'])
 def search():
 	search_word = request.form.get('search_word')
-	print(f'the word is {search_word}')
 	posts = Post.query.filter(Post.title.contains(search_word)|Post.body.contains(search_word)).all()
 	anount = len(posts)
-	print(anount)
-	# posts = Post.query.filter(Post.title.contains(search_word) | Post.body.contains(search_word)).all()
-	print(posts)
-	# if len(posts)<1:
-	# 	return render_template('posts/search.html', search_word=', но мы не смогли', posts=posts)
 	return render_template('posts/search.html', search_word=search_word, posts=posts, anount=anount)
 

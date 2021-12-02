@@ -4,7 +4,7 @@ from models import db
 from models import Plat, Block
 from datetime import datetime
 
-# расчетные модули
+### расчетные модули раскладки ###
 from Func.fbs import FBS
 from Func.plat import plat_build
 
@@ -50,8 +50,6 @@ def block_result():
         db.session.commit()
     except:
         return 'ошибка базы данных'
-
-
     return render_template('block_result.html', width_block=width_block, result=result)
 
 
@@ -60,7 +58,6 @@ def plat():
     title = 'раскладка плит'
     # log_query = Plat.query.all()
     log_query = Plat.query.order_by(Plat.date.desc()).limit(5)
-    print(log_query)
     return render_template('plat.html', title=title, log_query=log_query)
 
 
@@ -76,7 +73,7 @@ def plat_result():
     result = plat_build(width1_plat, width2_plat, lenght_plat)
     query_result = f'ширина1:{width1_plat} ширина2:{width2_plat} длина раскладки:{lenght_plat}'
     p = Plat(data_query=query_result, date=datetime.utcnow())
-    print(p)
+
 
     try:
         db.session.add(p)

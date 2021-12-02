@@ -21,7 +21,7 @@ def FBS(L):
 
     # Определение максимального количества блоков в заданой длине(+1 т.к. в массивах счет идет с 0)
     n_blok_min=math.floor(L/L900)+1
-    print(n_blok_min)
+
 
     # Перебор всех вариантов раскладки исходя из размерности максимального количества
     for i in range(n_blok_min):
@@ -36,12 +36,7 @@ def FBS(L):
                     n_var = n_var + 1
 
 
-    print('всего вариантов раскладки - ',n_var)
-    # for i in range(n_var):
-    #     print('900=', n_L900[i],'  1200=', n_L1200[i],'  2400=', n_L2400[i],'  L=', L_blok[i])
-
     L_max=max(L_blok)
-    print(L_max)
 
     mmax_var=0
 
@@ -54,10 +49,6 @@ def FBS(L):
             nmax_L2400.append(n_L2400[i])
             maxL_blok.append(L_blok[i])
 
-    print('варианты раскладки при максимальной длине - ', mmax_var)
-
-    for i in range(mmax_var):
-        print('900=', nmax_L900[i],'  1200=', nmax_L1200[i],'  2400=', nmax_L2400[i],'  L=', maxL_blok[i])
 
     for k in range(nmax_L2400[0]):
         BL.append(2400)

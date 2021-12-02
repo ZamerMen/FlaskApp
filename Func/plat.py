@@ -73,6 +73,6 @@ def plat_build(width1_plat, width2_plat, lenght_plat):
 
 
     return (vivod)
-    # return (vivod,v1,v2)
+
 
 
