@@ -14,6 +14,8 @@
 <!--        {% endfor %}-->
 <br/>
     {{post.body}}
+<p/>
+<a href="{{url_for('posts.edit_post', slug=post.slug)}}"> Редактировать</a>
 
 
 {% endblock %}

@@ -13,8 +13,8 @@
 <form action="{{url_for('posts.post_created')}}" method="post">
 
     {% for fild in form %}
-    <p> {{fild.lable}} </p>
-    <p> {{fild}} </p>
+    <p> {{ fild.label }} </p>
+    <p> {{ fild }} </p>
     {% endfor %}
 
     <p>

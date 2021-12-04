@@ -21,7 +21,7 @@
 
 <a href="{{url_for('posts.post_create')}}">создать новую запись</a>
 
-    {%for post in posts%}
+    {%for post in pages.items%}
 <p>
     <a href="{{url_for('posts.post_detail',slug=post.slug)}}"
             <h1>{{post.id}}, {{post.title}}, {{post.created.strftime('%Y-%m-%d(%H:%M)')}}</h1>
@@ -29,5 +29,39 @@
 </p>
     {%endfor%}
 
+
+<nav aria-label="...">
+  <ul class="pagination">
+
+    <li
+        {% if not pages.has_prev %}
+            class="page-item disabled"
+        {% endif %}
+    >
+      <a href="./?page={{ pages.prev_num }}" class="page-link">Previous</a>
+    </li>
+
+      {% for page in pages.iter_pages(left_edge=2, left_current=2, right_current=2, right_edge=2) %}
+      <li {% if page == pages.page %} class="page-item active" aria-current="page" {% endif %}>
+          {% if page==None %}
+            <a class="page-link" >...</a>
+          {% else %}
+            <a class="page-link" href="./?page={{ page }}">{{ page }}</a>
+          {% endif %}
+      </li>
+      {% endfor %}
+
+
+    <li
+        {% if not pages.has_next %}
+            class="page-item disabled"
+        {% endif %}
+    >
+      <a href="./?page={{ pages.next_num }}" class="page-link">Next</a>
+    </li>
+
+
+  </ul>
+</nav>
 
 {% endblock %}

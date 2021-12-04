@@ -29,12 +29,20 @@ def edit_post(slug):
 	return render_template('posts/edit_post.html', post=post, form=form)
 
 
-
 @posts.route('/')
 def posts_index():
-	p = Post.query.all()
+	# p = Post.query.all()
+	page = request.args.get('page')
+	if page and page.isdigit():
+		page = int(page)
+	else:
+		page = 1
 
-	return render_template('posts/index.html', posts=p)
+	p = Post.query.order_by(Post.created.desc())#all()
+	pages = p.paginate(page=page, per_page=3)
+
+	return render_template('posts/index.html', posts=p, pages=pages)
+
 
 @posts.route('/<slug>')
 def post_detail(slug):
@@ -52,7 +60,6 @@ def post_create():
 
 @posts.route('/created', methods=['post', 'get'])
 def post_created():
-
 	title = request.form.get('title')
 	body = request.form.get('body')
 	# tag = request.form.get('tag')
@@ -79,6 +86,6 @@ def tags_detail(slug):
 def search():
 	search_word = request.form.get('search_word')
 	posts = Post.query.filter(Post.title.contains(search_word)|Post.body.contains(search_word)).all()
-	anount = len(posts)
-	return render_template('posts/search.html', search_word=search_word, posts=posts, anount=anount)
+	amount = len(posts)
+	return render_template('posts/search.html', search_word=search_word, posts=posts, anount=amount)
 
