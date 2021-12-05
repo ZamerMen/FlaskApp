@@ -9,7 +9,7 @@ posts = Blueprint('posts',__name__, template_folder='templates')
 
 
 @posts.route('/create')
-# @login_required
+@login_required
 def create_post():
 	form = PostForms()
 	return render_template('posts/create_posts.html', form=form)
@@ -48,8 +48,7 @@ def posts_index():
 def post_detail(slug):
 	post = Post.query.filter(Post.slug==slug).first()
 	print(type(post))
-	tags = post.tags
-	print(tags)
+	tags = [] #post.tags
 	return render_template('posts/post_detail.html', post=post, tags=tags)
 
 

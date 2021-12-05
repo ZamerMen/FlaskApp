@@ -46,12 +46,14 @@
           <a class="nav-link" href="{{url_for('about')}}">About Zamer</a>
         </li>
 
+          <li>
+              {% if current_user.has_role('admin') %}
+                <a class="nav-link" href="./admin">Admin</a>
+              {% endif %}
+          </li>
+
 {% block search %}
-<!--                <li class="nav-item">-->
-<!--                        <form action="{{url_for('posts.search')}}" method="post">-->
-<!--                          <input type="text"  placeholder="search" name="search_word" value="{{request.args.get('search_word','')}}">-->
-<!--                        </form>-->
-<!--                </li>-->
+
 {% endblock %}
 
       </ul>
