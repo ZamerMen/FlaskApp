@@ -2,7 +2,7 @@ class Configuration(object):
 	DEBUG = True
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-	# SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:Potolock@localhost:5432/postgres'
+	# SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@localhost:5432/postgres'
 
 	SECRET_KEY = 'topsecret'
 
