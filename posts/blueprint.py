@@ -1,8 +1,9 @@
 from flask import Blueprint
 from flask import render_template, redirect, request, url_for
 from models import Post, Tag
-from app import db
+from app import db, user_datastore
 from .forms import PostForms
+
 
 from flask_security import login_required
 posts = Blueprint('posts',__name__, template_folder='templates')
@@ -16,7 +17,7 @@ def create_post():
 
 
 @posts.route('/<slug>/edit/', methods=['post','get'])
-# @login_required
+@login_required
 def edit_post(slug):
 	post = Post.query.filter(Post.slug==slug).first()
 	if request.method=='POST':
@@ -67,7 +68,6 @@ def post_created():
 		# t = Tag(name=tag)
 		p = Post(title=title, body=body)
 		db.session.add(p)
-		# db.session.add(t)
 		db.session.commit()
 		return redirect(url_for('posts.posts_index'))
 	except:
@@ -88,3 +88,18 @@ def search():
 	amount = len(posts)
 	return render_template('posts/search.html', search_word=search_word, posts=posts, anount=amount)
 
+
+@posts.route('/create_user', methods=['POST','GET'])
+def create_user():
+	if request.method=='POST':
+		email = request.form['email']
+		password = request.form['password']
+		user_datastore.create_user(email=email, password=password)
+
+		try:
+			db.session.commit()
+		except:
+			return r'ошибка базы данных'
+
+		return redirect(url_for('posts.posts_index'))
+	return render_template('posts/create_user.html')
